@@ -1,7 +1,7 @@
 name: validate file 
-on: [push, pull_request]
+on: workflow_dispatch
 jobs:
-  validate:
+  validate-html:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -11,5 +11,21 @@ jobs:
       - name: validate html file 
         run: test -f index.html
 
+  validate-js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       - name: validate js file 
         run: test -f script.js
+
+  validate-code:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+          name: get repo file 
+        
+        - uses: node --check script.js
+          name: validate js code 
+        
+        - uses: node --check index.html
+          name: validate html code 

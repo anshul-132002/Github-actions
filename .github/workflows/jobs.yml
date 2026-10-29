@@ -1,0 +1,15 @@
+name: Jobs test 
+on: push
+jobs:
+  validate-html:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Validate file
+        run: node script.js
+
+      - name: validate html file 
+        run: test -f index.html
+
+      - name: validate js file 
+        run: test -f script.js
